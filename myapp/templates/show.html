@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+{% if documents %}
+	<ul>
+		{% for doc in documents %}
+		<li>{{doc.docfile.name}}</li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p>업로드 목록 없음</p>
+{% endif %}
+
+<form action="{% url 'list' %}" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	<p>{{form.docfile.label}} : {{form.docfile.help_text}}</p>
+	<p>{{form.docfile}}</p>
+	<input type="submit" value="파일 업로드">
+</form>
+</body>
+</html>
